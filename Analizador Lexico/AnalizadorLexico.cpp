@@ -51,7 +51,7 @@ main()
    int indexSimbolos = 0;
 
 
-   for(int i=0;i<MAX;i++){tokenReservadas[i] = "";} // Fin del ciclo
+   for(int i=0;i<MAX;i++){tokenReservadas[i] = "";}
 
    for(int i=0;i<MAX;i++){tokensNoValidos[i] = "";}
 
@@ -61,7 +61,7 @@ main()
 
    while(*p!='\0')
    {
-		if((*p != ' ') && (*p !=','))  	//Primero revisa que sea distinto de un espacio ' ' y una coma ','
+		if((*p != ' ') && (*p !=','))
       {
       	if((*p== ';') || (*p=='"') || (*p=='(') || (*p==')') || (*p=='+') || (*p=='-') || (*p=='*') || (*p=='/') || (*p=='#') || (*p=='<') || (*p=='>') || (*p=='='))
 	      {
@@ -71,7 +71,7 @@ main()
          else
          {
 				palabra[indexPalabra] = *p;
-            auxWord[indexPalabra] = *p;	//La razon de usar este arreglo es para mandar como parametro al metodo verificarNumero()... debido a un problema de programacion.
+            auxWord[indexPalabra] = *p;	
             indexPalabra++;
          }
       }
@@ -87,8 +87,8 @@ main()
          	tokenNumeros[auxTN] = auxWord;
 		      auxTN++;
          }
-         for(int i=0;i<MAX;i++){palabra[i]='\0';}	//Para vaciar el arreglo de la palabra
-         for(int i=0;i<MAX;i++){auxWord[i]='\0';}	//Para vaciar el arreglo del arreglo auxiliar
+         for(int i=0;i<MAX;i++){palabra[i]='\0';}	
+         for(int i=0;i<MAX;i++){auxWord[i]='\0';}	
          indexPalabra=0;
       }
       p++;
@@ -196,7 +196,7 @@ bool verificarIdentificador(char palabra[]){
             p++;
          break;
          case 2:
-				//No es un identificador
+
             esIdentificador = false;
             *p = '\0';
          break;
