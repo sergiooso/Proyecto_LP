@@ -61,7 +61,7 @@ main()
 
    while(*p!='\0')
    {
-		if((*p != ' ') && (*p !=','))
+	if((*p != ' ') && (*p !=','))
       {
       	if((*p== ';') || (*p=='"') || (*p=='(') || (*p==')') || (*p=='+') || (*p=='-') || (*p=='*') || (*p=='/') || (*p=='#') || (*p=='<') || (*p=='>') || (*p=='='))
 	      {
@@ -70,7 +70,7 @@ main()
 	      }
          else
          {
-				palabra[indexPalabra] = *p;
+	    palabra[indexPalabra] = *p;
             auxWord[indexPalabra] = *p;	
             indexPalabra++;
          }
@@ -78,7 +78,7 @@ main()
       else if((*p ==' ') || (*p ==','))
       {
          if(verificarReservada(palabra) == true){
-				tokenReservadas[auxTR] = palabra;
+		tokenReservadas[auxTR] = palabra;
           	auxTR++;
          }else if(verificarIdentificador(palabra) == true){
          	tokenIdentificadores[auxTI] = palabra;
@@ -96,13 +96,13 @@ main()
 
    if(verificarReservada(palabra) == true){
    	tokenReservadas[auxTR] = palabra;
-    	auxTR++;
+    	       auxTR++;
    }else if(verificarIdentificador(palabra) == true){
-		tokenIdentificadores[auxTI] = palabra;
+	 tokenIdentificadores[auxTI] = palabra;
 		auxTI++;
    }else if(verificarNumero(auxWord)==true){
     	tokenNumeros[auxTN] = auxWord;
-      auxTN++;
+                auxTN++;
    }
 	
    printf("\t\tEXPRESION: %s\n",entrada);
@@ -165,7 +165,7 @@ bool verificarReservada(char palabra[]){
 }
 
 bool verificarIdentificador(char palabra[]){
-	string auxPalabra = palabra;
+   string auxPalabra = palabra;
    esIdentificador = false;
    short estado = 0;
    char *p = palabra;
@@ -176,27 +176,26 @@ bool verificarIdentificador(char palabra[]){
       	case 0:
          	if((isalpha(*p)) || (*p=='_')){
             	estado = 1;
-               esIdentificador = true;
+                esIdentificador = true;
             }
             else{
             	estado = 2;
-               esIdentificador = false;
+                esIdentificador = false;
             }
             p++;
          break;
          case 1:
          	if((isalpha(*p)) || (isdigit(*p)) || (*p=='_')){
             	estado = 1;
-               esIdentificador = true;
+                esIdentificador = true;
             }
             else{
             	estado = 2;
-               esIdentificador = false;
+                esIdentificador = false;
             }
             p++;
          break;
          case 2:
-
             esIdentificador = false;
             *p = '\0';
          break;
@@ -207,9 +206,9 @@ bool verificarIdentificador(char palabra[]){
 
 bool verificarNumero(char palabra[]){
 	string auxPalabra = palabra;
-   esNumero = false;
+        esNumero = false;
 	short estado = 0,cont=0;
-   char *p = palabra;
+        char *p = palabra;
 	while(*p!='\0')
    {
    	switch(estado)
