@@ -220,10 +220,10 @@ bool verificarNumero(char palabra[]){
                cont++;
             }
             else if( ((*p == '.') && (cont==0)) || (isalpha(*p))){
-					estado = 2;
+	       estado = 2;
                esNumero=false;
             }else if(*p=='.'){
-					estado = 1;
+		estado = 1;
             	esNumero = false;
             }
          	p++;
@@ -240,7 +240,7 @@ bool verificarNumero(char palabra[]){
          	p++;
          break;
          case 2:
-				esNumero = false;
+		esNumero = false;
          	*p = '\0';
          break;
       }
