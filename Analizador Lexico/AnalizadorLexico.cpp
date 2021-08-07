@@ -12,7 +12,7 @@ using namespace std;
 char *PalabrasReservadas[MAX_RES] = {"si","entonces","sino","entero","decimal","logico","texto","char","mientras","haga","repita",
 "hasta","var","como","verdadero","falso","declare","inicie","termine","lea","imprima","rompa","nop"};
 char tokenSimbolos[MAX];
-char auxWord[MAX];	//Una variable auxiliar para guardar dos veces la palabra(token) que se vaya formando
+char auxWord[MAX];
 string tokenNumeros[MAX];
 string tokenIdentificadores[MAX];
 string tokenReservadas[MAX];
@@ -20,13 +20,11 @@ string tokensNoValidos[MAX];
 bool esNumero=true;
 bool esIdentificador = true;
 
-//Variables auxiliares para guardar en Tokens
 int auxTR=0;
 int auxTI=0;
 int auxTN=0;
 int auxTNV=0;
 
-//Los diferentes procedimientos que se desarrollaran en el programa y llamaran en su momento desde el metodo main()
 bool verificarNumero(char palabra[]);
 bool verificarIdentificador(char palabra[]);
 bool verificarReservada(char palabra[]);
@@ -38,21 +36,21 @@ void imprimirIdentificadoresNoValidos();
 
 main()
 {
-	system("COLOR 0A");
-	unsigned char entrada[MAX];
+   system("COLOR 0A");
+   unsigned char entrada[MAX];
    char *p = entrada;
    printf("Ingrese la primera linea del lenguaje: ");
    fflush(stdin);
    gets(entrada);
-	fflush(stdin);
+   fflush(stdin);
    clrscr();
    system("COLOR 0B");
 
-	char palabra[MAX]; //Esta variable es muy importante, pues guardara caracter por caracter formando asi una palabra y termina de guardar cuando detecta un espacio.
+   char palabra[MAX]; 
    int indexPalabra=0;
    int indexSimbolos = 0;
 
-   //Ciclos para Iniciar diferentes arreglos.
+
    for(int i=0;i<MAX;i++){tokenReservadas[i] = "";} // Fin del ciclo
 
    for(int i=0;i<MAX;i++){tokensNoValidos[i] = "";}
@@ -61,7 +59,6 @@ main()
 		palabra[i] = '\0';
    }
 
-   //Este bucle es el que recorre cada caracter de la entrada(programa fuente) que ingreso el usuario, el procedimiento dentro del bucle es para formar los tokens necesarios.
    while(*p!='\0')
    {
 		if((*p != ' ') && (*p !=','))  	//Primero revisa que sea distinto de un espacio ' ' y una coma ','
@@ -80,7 +77,6 @@ main()
       }
       else if((*p ==' ') || (*p ==','))
       {
-      	// Guarda la palabra en los respectivos tokens segun las funciones hayan examinado la palabra.
          if(verificarReservada(palabra) == true){
 				tokenReservadas[auxTR] = palabra;
           	auxTR++;
@@ -98,8 +94,7 @@ main()
       p++;
    }
 
-   //Esto es para revisar la ultima palabra formada que no se pudo examinar en el bucle while anterior
-	if(verificarReservada(palabra) == true){
+   if(verificarReservada(palabra) == true){
    	tokenReservadas[auxTR] = palabra;
     	auxTR++;
    }else if(verificarIdentificador(palabra) == true){
@@ -109,19 +104,16 @@ main()
     	tokenNumeros[auxTN] = auxWord;
       auxTN++;
    }
-
-   //FINALMENTE SE LLAMAN A IMPRIMIR LOS RESULTADOS OBTENIDOS.
+	
    printf("\t\tEXPRESION: %s\n",entrada);
    imprimirTokenReservadas();
    imprimirTokenSimbolos();
    imprimirTokenIdentificadores();
    imprimirTokenNumeros();
    imprimirIdentificadoresNoValidos();
-	getch();
+   getch();
 }
 
-
-//Inicio del desarrollo de los metodos para imprimir los resultados.
 void imprimirTokenSimbolos(){
 	puts("\n\n----------------\n|TOKENS SIMBOLOS|\n----------------");
 	for(int i=0;i<strlen(tokenSimbolos);i++){printf("%c\n",tokenSimbolos[i]);}
@@ -155,11 +147,9 @@ void imprimirIdentificadoresNoValidos(){
    }
 }
 
-//Fin del desarrollo de metodos para imprimir
 
-// Metodo para verificar si el token formado corresponde a una palabra reservada
 bool verificarReservada(char palabra[]){
-	int comp;
+   int comp;
    bool esReservada=false;
    string str(palabra);
 	for(int i=0; i<MAX_RES; i++)
@@ -174,7 +164,6 @@ bool verificarReservada(char palabra[]){
    return esReservada;
 }
 
-// Metodo para verificar si el token formado cumple para ser un identificador
 bool verificarIdentificador(char palabra[]){
 	string auxPalabra = palabra;
    esIdentificador = false;
@@ -216,7 +205,6 @@ bool verificarIdentificador(char palabra[]){
    return esIdentificador;
 }
 
-//Metodo para revisar si el token formado cumple para ser un numero entero o decimal. Aparte, aqui se guardan los tokens No Validos para mostrarlos en el metodo imprimirIdentificadoresNoValidos()
 bool verificarNumero(char palabra[]){
 	string auxPalabra = palabra;
    esNumero = false;
